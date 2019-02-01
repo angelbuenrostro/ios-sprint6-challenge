@@ -24,9 +24,11 @@ class LockSlider: UIControl {
     func updateValue(for touch: UITouch){
         let touchPoint = touch.location(in: self)
         lockValue = self.frame.maxX * 0.8
+        print("\(touchPoint)")
+        print("Dot x position is: \(dot[0].bounds.minX)")
         
-        if self.frame.contains(touchPoint){
-            dot[0].center = touchPoint
+        if self.bounds.contains(touchPoint){
+            dot[0].center.x = touchPoint.x
             
                 sendActions(for: .valueChanged)
                 print("\(touchPoint)")
