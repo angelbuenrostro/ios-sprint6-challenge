@@ -38,19 +38,13 @@ class LockSlider: UIControl {
                 sendActions(for: .valueChanged)
                 UIView.animateKeyframes(withDuration: 1, delay: 0, options: .allowUserInteraction, animations: {
                     UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.5, animations: {
-                        self.dot[0].center.x = self.frame.maxX - 60
-                    })
-                    UIView.addKeyframe(withRelativeStartTime: 0.75, relativeDuration: 0.5, animations: {
-                        self.dot[0].center.x = self.dotOriginalX
+                        self.dot[0].center.x = self.frame.maxX - 50
                     })
                 }, completion: nil)
             } else {
-                UIView.animateKeyframes(withDuration: 0.75, delay: 0, options: .allowUserInteraction, animations: {
+                UIView.animateKeyframes(withDuration: 0.25, delay: 0, options: .allowUserInteraction, animations: {
                     UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.05, animations: {
                         self.dot[0].center.x = touchPoint.x
-                    })
-                    UIView.addKeyframe(withRelativeStartTime: 0.05, relativeDuration: 0.95, animations: {
-                        self.dot[0].center.x = self.dotOriginalX
                     })
                 }, completion: nil)
             
@@ -71,6 +65,14 @@ class LockSlider: UIControl {
     override func continueTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
         let touchPoint = touch.location(in: self)
         if bounds.contains(touchPoint) {
+            
+            UIView.animateKeyframes(withDuration: 0.25, delay: 0, options: .allowUserInteraction, animations: {
+                UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.05, animations: {
+                    self.dot[0].center.x = touchPoint.x
+                })
+                
+            }, completion: nil)
+            
             sendActions(for: .touchDragInside)
             updateValue(for: touch)
             print("continue tracking: touchDragInside")
@@ -85,6 +87,14 @@ class LockSlider: UIControl {
         guard let touch = touch else { return }
         let touchPoint = touch.location(in: self)
         if bounds.contains(touchPoint) {
+            
+            UIView.animateKeyframes(withDuration: 0.2, delay: 0, options: .allowUserInteraction, animations: {
+                UIView.addKeyframe(withRelativeStartTime: 0.15, relativeDuration: 0.5, animations: {
+                    self.dot[0].center.x = self.dotOriginalX
+                })},
+                
+                completion: nil)
+            
             sendActions(for: .touchUpInside)
             print("endTracking: touchUpInside")
         } else {
