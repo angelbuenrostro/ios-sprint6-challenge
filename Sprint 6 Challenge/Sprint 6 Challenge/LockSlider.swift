@@ -36,13 +36,23 @@ class LockSlider: UIControl {
             if sliderValue > lockValue {
                 touch.view?.isUserInteractionEnabled = false
                 sendActions(for: .valueChanged)
-                UIView.animateKeyframes(withDuration: 1, delay: 1.5, options: .allowUserInteraction, animations: {
-                    self.dot[0].center.x = self.dotOriginalX
+                UIView.animateKeyframes(withDuration: 1, delay: 0, options: .allowUserInteraction, animations: {
+                    UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.5, animations: {
+                        self.dot[0].center.x = self.frame.maxX - 60
+                    })
+                    UIView.addKeyframe(withRelativeStartTime: 0.75, relativeDuration: 0.5, animations: {
+                        self.dot[0].center.x = self.dotOriginalX
+                    })
                 }, completion: nil)
             } else {
-                UIView.animate(withDuration: 1) {
-                    self.dot[0].center.x = self.dotOriginalX
-                }
+                UIView.animateKeyframes(withDuration: 0.75, delay: 0, options: .allowUserInteraction, animations: {
+                    UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.05, animations: {
+                        self.dot[0].center.x = touchPoint.x
+                    })
+                    UIView.addKeyframe(withRelativeStartTime: 0.05, relativeDuration: 0.95, animations: {
+                        self.dot[0].center.x = self.dotOriginalX
+                    })
+                }, completion: nil)
             
                 sendActions(for: .valueChanged)
                 print("\(touchPoint)")
