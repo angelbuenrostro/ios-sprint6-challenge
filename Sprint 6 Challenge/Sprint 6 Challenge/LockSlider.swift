@@ -20,10 +20,10 @@ class LockSlider: UIControl {
     required init?(coder aCoder: NSCoder){
         super.init(coder: aCoder)
         setUp()
-        
     }
     
     func updateValue(for touch: UITouch){
+        
         let touchPoint = touch.location(in: self)
         sliderValue = touchPoint.x
         lockValue = (self.frame.maxX * 0.8) - 30
@@ -34,6 +34,7 @@ class LockSlider: UIControl {
             dot[0].center.x = touchPoint.x
             
             if sliderValue > lockValue {
+                touch.view?.isUserInteractionEnabled = false
                 sendActions(for: .valueChanged)
                 UIView.animateKeyframes(withDuration: 1, delay: 1.5, options: .allowUserInteraction, animations: {
                     self.dot[0].center.x = self.dotOriginalX

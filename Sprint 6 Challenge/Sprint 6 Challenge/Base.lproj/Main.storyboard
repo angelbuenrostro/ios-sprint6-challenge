@@ -71,6 +71,7 @@
                     <connections>
                         <outlet property="backgroundView" destination="vp6-W3-00Q" id="NBb-L5-aGP"/>
                         <outlet property="imageView" destination="P3i-rS-FsX" id="K3M-Ql-cGP"/>
+                        <outlet property="lockSlider" destination="CfL-Zk-9Vd" id="tGo-PM-ur1"/>
                         <outlet property="resetButton" destination="L8q-S3-a7z" id="SWr-dq-UfW"/>
                     </connections>
                 </viewController>
@@ -84,7 +85,6 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9xy-l8-ASq" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="HkB-Sr-ypo">
-                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

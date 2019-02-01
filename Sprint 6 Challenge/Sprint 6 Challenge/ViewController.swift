@@ -20,8 +20,11 @@ class ViewController: UIViewController {
             return
         } else {
             imageView.image = #imageLiteral(resourceName: "Locked")
+            resetButton.title = ""
+            lockSlider.isUserInteractionEnabled = true
         }
     }
+    @IBOutlet weak var lockSlider: LockSlider!
     @IBAction func updateSlider(_ sliderControl: LockSlider) {
         if sliderControl.sliderValue < sliderControl.lockValue {
             resetButton.title = ""
