@@ -22,6 +22,7 @@ class ViewController: UIViewController {
             imageView.image = #imageLiteral(resourceName: "Locked")
             resetButton.title = ""
             lockSlider.isUserInteractionEnabled = true
+            lockSlider.resetDot()
         }
     }
     @IBOutlet weak var lockSlider: LockSlider!
