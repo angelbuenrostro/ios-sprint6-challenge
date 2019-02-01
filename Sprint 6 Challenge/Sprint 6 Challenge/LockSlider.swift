@@ -15,6 +15,7 @@ class LockSlider: UIControl {
     var dot : [UIView] = []
     var dotMin: CGFloat = 0
     var dotMax: CGFloat = 0
+    var dotOriginalX: CGFloat = 0
     
     required init?(coder aCoder: NSCoder){
         super.init(coder: aCoder)
@@ -25,18 +26,29 @@ class LockSlider: UIControl {
     func updateValue(for touch: UITouch){
         let touchPoint = touch.location(in: self)
         sliderValue = touchPoint.x
-        lockValue = self.frame.maxX * 0.8
+        lockValue = (self.frame.maxX * 0.8) - 30
         print("\(touchPoint)")
         print("Dot x position is: \(dot[0].bounds.minX)")
         
         if self.bounds.contains(touchPoint){
             dot[0].center.x = touchPoint.x
             
+            if sliderValue > lockValue {
+                sendActions(for: .valueChanged)
+                UIView.animateKeyframes(withDuration: 1, delay: 1.5, options: .allowUserInteraction, animations: {
+                    self.dot[0].center.x = self.dotOriginalX
+                }, completion: nil)
+            } else {
+                UIView.animate(withDuration: 1) {
+                    self.dot[0].center.x = self.dotOriginalX
+                }
+            
                 sendActions(for: .valueChanged)
                 print("\(touchPoint)")
                 print("Dot x position is: \(dot[0].bounds.minX)")
             }
         }
+    }
     
     override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
         sendActions(for: .touchDown)
@@ -88,6 +100,7 @@ class LockSlider: UIControl {
         dotView.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -215).isActive = true
         dotView.heightAnchor.constraint(equalTo: self.heightAnchor, constant: -8).isActive = true
         dotView.layer.cornerRadius = 15
+        dotOriginalX = dotView.center.x + 20
         dot.append(dotView)
         lockValue = (self.frame.width * 0.8) + self.frame.minX
     }
