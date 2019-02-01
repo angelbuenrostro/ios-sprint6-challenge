@@ -11,6 +11,7 @@ import UIKit
 class LockSlider: UIControl {
     
     var lockValue: CGFloat = 1
+    var sliderValue: CGFloat = 0.0
     var dot : [UIView] = []
     var dotMin: CGFloat = 0
     var dotMax: CGFloat = 0
@@ -23,6 +24,7 @@ class LockSlider: UIControl {
     
     func updateValue(for touch: UITouch){
         let touchPoint = touch.location(in: self)
+        sliderValue = touchPoint.x
         lockValue = self.frame.maxX * 0.8
         print("\(touchPoint)")
         print("Dot x position is: \(dot[0].bounds.minX)")
@@ -87,6 +89,7 @@ class LockSlider: UIControl {
         dotView.heightAnchor.constraint(equalTo: self.heightAnchor, constant: -8).isActive = true
         dotView.layer.cornerRadius = 15
         dot.append(dotView)
+        lockValue = (self.frame.width * 0.8) + self.frame.minX
     }
 
     

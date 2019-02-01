@@ -23,11 +23,12 @@ class ViewController: UIViewController {
         }
     }
     @IBAction func updateSlider(_ sliderControl: LockSlider) {
-        if sliderValue < 0.80 {
+        if sliderControl.sliderValue < sliderControl.lockValue {
             resetButton.title = ""
             return
         }
         else {
+            imageView.image = #imageLiteral(resourceName: "Unlocked")
             resetButton.title = "Reset"
         }
     }
